@@ -1,0 +1,28 @@
+Ex4: stack overflow, débordement de pile
+
+Ex7: il nous faudrait un mécanisme d'héritage ? surcharge de la  fonction de transfert
+
+class mapeur(){
+}
+mapeurTriple extends mapeur  (ou bien implements mapeur)
+
+
+Ex 8
+de 1 à 2 : 
+factorisation : une fonction pour 2 figures
+
+de 2 à 3 :
+factorisation des opérations de traçage.
+
+le prototype des fonctions s'alourdit mais le code devient plus clair et plus facile à maintenir.
+
+Ex 9
+
+to star
+  repeat 5 [ fd 100 rt 144 ]
+  rt 90
+  forward 70
+  rt -90
+end
+clearscreen
+repeat 5 [star]
