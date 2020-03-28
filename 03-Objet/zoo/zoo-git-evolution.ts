@@ -62,6 +62,7 @@ class Panda extends ZooAnimal {
         this.plantePreferee=plantePreferee;
     }
 
+        //implémentation de la methode abstraite pour les Pandas
     calculeBienNourri(){
         return this.quantiteNourritureTotale > (this.poids/4);
     }
@@ -81,6 +82,7 @@ class Dauphin extends ZooAnimal {
     }
 
     calculeBienNourri(){
+        //implémentation de la methode abstraite pour les Dauphins
         return this.quantiteNourritureTotale > (this.poids/8);
     }
 
@@ -92,15 +94,32 @@ class Dauphin extends ZooAnimal {
 }
 
 
-// Création d’instances de classes: objets
+let winter = new Dauphin ("Winter",20,110,"sardine");
 let flipper = new Dauphin("Flipper", 30, 150,"maquereau");
 let pandi= new Panda("Pandi", 10, 80,"bambou");
-// Appels de méthodes sur les objets
+
+
 flipper.setNom("Flipper Junior");
-flipper.nouvelleJournee();
-pandi.nouvelleJournee();
+
+//UPCASTING : différentes classes filles sont dans un mm tableau
+let LesAnimaux:ZooAnimal[] = [flipper,winter,pandi];
+
+for (let unAnimal of LesAnimaux)
+{
+    //On appelle la methode nouvelleJournée de la classe mère ZooAnimal 
+    unAnimal.nouvelleJournee();
+}
+
+
 flipper.recoitNourriture(10);
+winter.recoitNourriture(9);
 pandi.recoitNourriture(10);
 flipper.recoitNourriture(25);
-console.log(flipper.etatAlimentation());
-console.log(pandi.etatAlimentation());
+
+
+for (let unAnimal of LesAnimaux)
+{
+    //on appelle la methode etatAlimentation des classes filles Panda et Dauphin
+    console.log(unAnimal.etatAlimentation());
+}
+
