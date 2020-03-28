@@ -48,9 +48,39 @@ if (this.bienNourri) {etat+= " " + this.nom+ " est bien nourri.";}return etat;}
 
 }
 
+class Panda extends ZooAnimal {
+    private plantePreferee: string;
+
+    constructor(nom: string, age: number, poids: number, plantePreferee: string) {
+        super(nom,age,poids);
+        this.plantePreferee=plantePreferee;
+    }
+    
+    etatAlimentation(){
+        return super.etatAlimentation() + " sa plante preferee est : " + this.plantePreferee;
+
+    }
+}
+
+class Dauphin extends ZooAnimal {
+    private poissonPrefere: string;
+
+    constructor(nom: string, age: number, poids: number, poissonPrefere: string) {
+        super(nom,age,poids);
+        this.poissonPrefere=poissonPrefere;
+    }
+
+    etatAlimentation(){
+        return super.etatAlimentation() + " sa plante preferee est : " + this.poissonPrefere;
+
+    }
+
+}
+
+
 // Création d’instances de classes: objets
-let flipper = new ZooAnimal("Flipper", 30, 150);
-let pandi= new ZooAnimal("Pandi", 10, 80);
+let flipper = new Dauphin("Flipper", 30, 150,"maquereau");
+let pandi= new Panda("Pandi", 10, 80,"bambou");
 // Appels de méthodes sur les objets
 flipper.setNom("Flipper Junior");
 flipper.nouvelleJournee();
