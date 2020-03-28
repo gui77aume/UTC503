@@ -17,6 +17,22 @@ this.bienNourri= false;}
 
 // Méthodes
 
+//accesseurs
+getNom(){
+    return this.nom;
+}
+
+setNom(nouveauNom: string) {
+    //controle de la valeur
+    if (nouveauNom == null || nouveauNom.trim().length == 0) {
+        console.log("erreur, le nouveau nom est vide ou incorrect");
+        return;
+    } 
+    this.nom=nouveauNom;
+
+}
+
+
 nouvelleJournee() {
 this.quantiteNourritureTotale= 0;
 this.bienNourri= false;}
@@ -36,6 +52,7 @@ if (this.bienNourri) {etat+= " " + this.nom+ " est bien nourri.";}return etat;}
 let flipper = new ZooAnimal("Flipper", 30, 150);
 let pandi= new ZooAnimal("Pandi", 10, 80);
 // Appels de méthodes sur les objets
+flipper.setNom("Flipper Junior");
 flipper.nouvelleJournee();
 pandi.nouvelleJournee();
 flipper.recoitNourriture(10);
