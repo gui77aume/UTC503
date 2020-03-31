@@ -17,23 +17,23 @@ class Trajet implements Mesurable {
 }
 
 class MinMax {
-    private max : number;
-    private min : number;
+    private max : Mesurable;
+    private min : Mesurable;
 
     constructor(t: Array<Mesurable>){
         if (t.length==0 || t == null) {
             console.log("MinMax: pbm initialisation");
             return;}
 
-        this.min=t[0].length;
-        this.max=t[0].length; 
+        this.min=t[0];
+        this.max=t[0]; 
         this.computeMinMax(t);
     }
 
     private computeMinMax(t: Array<Mesurable>){
         for(let e of t){
-            if (e.length>this.max) {this.max=e.length;}
-            if (e.length<this.min) {this.min=e.length;}
+            if (e.length>this.max.length) {this.max=e;}
+            if (e.length<this.min.length) {this.min=e;}
         }
     }
 
@@ -48,12 +48,12 @@ class MinMax {
 
 let trajets: Array<Trajet> = new Array(new Trajet("a", 271), new Trajet("b", 161), new Trajet("c", 314));
 let trajetMinMax = new MinMax(trajets);
-console.log(`Le plus grand trajet mesure : ${trajetMinMax.getMax()} km`);
-console.log(`Le plus petit trajet mesure : ${trajetMinMax.getMin()} km`);
+console.log(`Le plus grand trajet est : ${trajetMinMax.getMax()} `);
+console.log(`Le plus petit trajet est : ${trajetMinMax.getMin()} `);
 
 let chaines: Array<string> = new Array("chaineDe9", "chDe5", "grandeChaineDe16");
 let chaineMinMax = new MinMax(chaines);
-console.log(`La plus grande chaine mesure : ${chaineMinMax.getMax()} caractères`);
-console.log(`La plus petite chaine mesure : ${chaineMinMax.getMin()} caractères `);
+console.log(`La plus grande chaine est : ${chaineMinMax.getMax()} `);
+console.log(`La plus petite chaine est : ${chaineMinMax.getMin()} `);
 
 // Replace console.log by alert when run on TypeScript Playground
