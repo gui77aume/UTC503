@@ -1,47 +1,55 @@
 interface Iterateur<T>{
-    aUnSuivant(): boolean;
-    suivant(): T;
+    first():void;
+    next():void;
+    isDone(): boolean;
+    currentItem(): T;
 }
 
 class Fibonacci implements Iterateur<number> {
-    
+    // fibonacci(n) = fibonnacci(n-1) + fibonnacci(n-2)
 
     private nMax : number;
     private index : number;
     private nMoinsUn : number;
     private nMoinsDeux : number
-
+   
 
     constructor (n:number){
         this.nMax=n;
+        this.index=0;
+        this.nMoinsDeux=-1;
+        this.nMoinsUn=1;
+    
+    }
+
+    first():void{
         this.index=0;
         this.nMoinsDeux=0;
         this.nMoinsUn=1;
     }
 
-    suivant ():number {
-        // fibonacci(n) = fibonnacci(n-1) + fibonnacci(n-2)
-        var resultat:number;
-        
+    
+    next():void{
+        var passage=this.nMoinsUn + this.nMoinsDeux;
+        this.nMoinsDeux=this.nMoinsUn;
+        this.nMoinsUn=passage;   
+        this.index++;
 
+    }
+
+    isDone():boolean  {
+      return this.index == this.nMax;
+    }
+
+    currentItem ():number {
+        var resultat;
         if (this.index==1 || this.index==0){
             resultat=this.index;
         } else {
-            resultat=this.nMoinsUn + this.nMoinsDeux;
-            this.nMoinsDeux=this.nMoinsUn;
-            this.nMoinsUn= resultat;
-            }
-        
-        this.index++;
-
+            resultat= this.nMoinsUn + this.nMoinsDeux;
+        }
         return resultat;
     }
-
-    aUnSuivant():boolean  {
-      return this.index != this.nMax;
-    }
-
-    
 
 
 }
@@ -54,8 +62,9 @@ class Fibonacci implements Iterateur<number> {
 // Fin (*)
 var f: Fibonacci ;
 f = new Fibonacci(10); // (**)
-while(f.aUnSuivant()){
-    console.log(`${f.suivant()},`);
+while(!f.isDone()){
+    console.log(`${f.currentItem()},`);
+    f.next();
 }
 
 // (*)  Ex2 : l'observeur affiche 'Fin' à la fin de la série
