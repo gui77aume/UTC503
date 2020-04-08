@@ -43,26 +43,26 @@ class Fibonacci   implements Iterateur<number>,Observable {
         this.nombreObservateurs=0;
     }
 
-    attach(o:fibObserver){
+    public attach(o:fibObserver){
         this.observateurs[this.nombreObservateurs]=o;
         this.nombreObservateurs++;
     }
 
-    notifyChange(message:string):void{
+    public notifyChange(message:string):void{
         var i:number;
             for (i=0;i<this.nombreObservateurs;i++) {
                 this.observateurs[i].update(message);
             }
     }
 
-    first():void{
+    public first():void{
         this.index=0;
         this.nMoinsDeux=0;
         this.nMoinsUn=1;
         //this.notifyChange("First !");
     }
     
-    next():void{
+    public next():void{
         var passage=this.nMoinsUn + this.nMoinsDeux;
         this.nMoinsDeux=this.nMoinsUn;
         this.nMoinsUn=passage;   
@@ -71,11 +71,11 @@ class Fibonacci   implements Iterateur<number>,Observable {
         
     }
 
-    isDone():boolean  {
+    public isDone():boolean  {
       return this.index == this.nMax;
     }
 
-    currentItem ():number {
+    public currentItem ():number {
         var resultat;
         if (this.index==1 || this.index==0){
             resultat=this.index;
