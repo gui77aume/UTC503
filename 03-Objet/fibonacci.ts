@@ -27,20 +27,35 @@ interface Iterateur<T>{
 class Fibonacci   implements Iterateur<number>,Observable {
     // fibonacci(n) = fibonnacci(n-1) + fibonnacci(n-2)
 
+    private static instance: Fibonacci;
+
     private nMax : number;
     private index : number;
     private nMoinsUn : number;
     private nMoinsDeux : number
     private observateurs : fibObserver[]; //TODO: on devrait avoir une liste d'observateurs, pas un seul
-    private nombreObservateurs;
+    private nombreObservateurs:number;
    
-    constructor (n:number){
-        this.nMax=n;
+    private constructor (){
+        this.nMax=0;
         this.index=0;
         this.nMoinsDeux=-1;
         this.nMoinsUn=1;
         this.observateurs=new Array(10);
         this.nombreObservateurs=0;
+    }
+
+
+    public static getInstance(): Fibonacci {
+        if (!Fibonacci.instance) {
+            Fibonacci.instance = new Fibonacci();
+        }
+
+        return Fibonacci.instance;
+    }
+
+    public setNombreTermes(n:number){
+        this.nMax=n;
     }
 
     public attach(o:fibObserver){
@@ -96,11 +111,13 @@ class Fibonacci   implements Iterateur<number>,Observable {
 // Fin (*)
 var f: Fibonacci ;
 var o1,o2 : fibObserver;
-f = new Fibonacci(10); // (**)
+ // (**)
+ f=Fibonacci.getInstance();
 o1 = new fibObserver("observateur n°1");
 f.attach(o1);
 o2 = new fibObserver("observateur n°2");
 f.attach(o2);
+f.setNombreTermes(10)
 while(!f.isDone()){
     console.log(`${f.currentItem()},`);
     f.next();
